@@ -9,6 +9,7 @@ export const TablaProductos = () => {
     const [nombre, setNombre] = useState('')
     const [precio, setPrecio] = useState('')
     const [descripcion, setDescripcion] = useState('')
+    const [imagen, setImagen] = useState('')
     const [showEditar, setShowEditar] = useState(false)
     const [productoEditar, setProductoEditar] = useState({})
 
@@ -31,12 +32,13 @@ export const TablaProductos = () => {
       getProductos();
     }, []);
 
-    const crearProductosBackend = async (nombre,precio,descripcion) => {
+    const crearProductosBackend = async (nombre,precio,descripcion,imagen) => {
         try {
             const resp = await testApi.post('/admin/crearProducto',{
                 nombre,
                 precio,
                 descripcion,
+                imagen,
             });
             getProductos();
     
@@ -51,7 +53,7 @@ export const TablaProductos = () => {
         //...
         //fin de las validaciones
 
-        crearProductosBackend(nombre,precio,descripcion)
+        crearProductosBackend(nombre,precio,descripcion,imagen)
     };
 
     //funcion encargada de eliminar el producto
@@ -84,12 +86,13 @@ export const TablaProductos = () => {
     };
 
     const editarProductoBackend = async (producto) => {
-        const {nombre,precio,descripcion,_id} = producto
+        const {nombre,precio,descripcion,imagen,_id} = producto
         try {
             const resp = await testApi.put('/admin/editarProducto',{
              nombre,
              precio,
              descripcion,
+             imagen,
              _id
             });
             getProductos();
@@ -132,6 +135,10 @@ export const TablaProductos = () => {
               <Form.Label>Descripcion</Form.Label>
                 <Form.Control type="text"  onChange={(e) => setDescripcion(e.target.value)}/>
             </Form.Group>
+             <Form.Group className="mb-3" >
+              <Form.Label>imagen</Form.Label>
+                <Form.Control type="text"  onChange={(e) => setImagen(e.target.value)}/>
+            </Form.Group>
           <Button variant="secondary" onClick={handleClose}>
             Cancelar
           </Button>
@@ -143,6 +150,8 @@ export const TablaProductos = () => {
         <Modal.Footer>
         </Modal.Footer>
       </Modal>
+      <div className='table-responsive'>  
+
      <Table striped bordered hover>
       <thead>
         <tr>
@@ -150,6 +159,7 @@ export const TablaProductos = () => {
           <th>Nombre</th>
           <th>Precio</th>
           <th>Descripcion</th>
+          <th>Imagen</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -161,6 +171,7 @@ export const TablaProductos = () => {
                     <td>{productos.nombre}</td>
                     <td>{productos.precio}</td>
                     <td>{productos.descripcion}</td>
+                    <td>{productos.imagen}</td>
                     <td>
                     <Button onClick={() => editarProducto(productos)} className='btn-btn-warning'>Editar</Button>
                     <Button className='btn-btn-danger ms-2' onClick={() => eliminarProductoClick(productos._id)}
@@ -171,6 +182,7 @@ export const TablaProductos = () => {
         })}
       </tbody>  
     </Table>
+      </div>
 
 
         <Modal show={showEditar}>
@@ -196,6 +208,12 @@ export const TablaProductos = () => {
                        <Form.Control type="text"
                           value={productoEditar.descripcion}
                           onChange={(e) => handleChangeEditar('descripcion', e.target.value)} />
+                      </Form.Group>
+                          <Form.Group className="mb-3" >
+                       <Form.Label>Imagen</Form.Label>
+                       <Form.Control type="text"
+                          value={productoEditar.imagen}
+                          onChange={(e) => handleChangeEditar('imagen', e.target.value)} />
                       </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>

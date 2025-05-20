@@ -1,108 +1,113 @@
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import bannerImg from '../image/maquinacocer6.jpg'; // <-- Reemplaza con tu imagen real
-import img1 from '../image/maquinacocer3.jpg';
-import img2 from '../image/maquinacocer5.jpg';
-import img3 from '../image/maquinacocer4.jpg';
-import img4 from '../image/maquinacocer7.jpg';
-import img5 from '../image/maquinacocer8.jpg';
+import React, { useEffect, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import axios from 'axios'; // asegurate de tener axios instalado
+import '../style/shop.css';
+import { FaSearch } from 'react-icons/fa';
+import bannerEnergeo from '../image/bannerShopp.jpg'
+import testApi from '../Api/testApi';
 
 export const Shop = () => {
+  const [productos, setListaProductos] = useState([]);
+  const [busqueda, setBusqueda] = useState('')
+  const [precioMin, setPrecioMin] = useState('');
+  const [precioMax, setPrecioMax] = useState('');
+
+  const getProductos = async () => {
+        try {
+            const resp = await testApi.get('/admin/productos');
+           setListaProductos(resp.data.listaProductos);
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+      getProductos();
+    }, []);
+
+     const productosFiltrados = productos.filter((producto) => {
+     const coincideNombre = producto.nombre.toLowerCase().includes(busqueda.toLowerCase());
+     const cumpleMin = precioMin === '' || producto.precio >= parseFloat(precioMin);
+     const cumpleMax = precioMax === '' || producto.precio <= parseFloat(precioMax);
+     return coincideNombre && cumpleMin && cumpleMax;
+  });
+
+
+
   return (
     <div>
-      {/* Imagen con texto centrado */}
-      <div style={{ width: '100%', overflow: 'hidden', position: 'relative' }}>
+      {/* Banner */}
+      <article className="container-fluid d-flex align-items-center bannerShop">
         <img
-          src={bannerImg}
-          alt="Banner"
-          style={{
-            width: '100%',
-            height: '60vh',
-            objectFit: 'cover',
-            display: 'block',
-            filter: 'brightness(0.6)',
-          }}
+          className="d-block w-100 h-100 imagenBanner"
+          src={bannerEnergeo}
+          alt="banner shop"
         />
-        <h1
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            color: 'white',
-            fontWeight: 'bold',
-            fontSize: '3rem',
-            textAlign: 'center',
-          }}
-        >
-          Tienda Online
-        </h1>
-      </div>
+      </article>
 
+      {/* Sección de productos dinámicos */}
       <Container className="my-5">
-        {/* Dos columnas, dos filas alternadas */}
-        <Row className="mb-5 align-items-center">
-          <Col md={6}>
-            <img src={img1} alt="Imagen 1" style={{ width: '100%', borderRadius: '8px' }} />
-          </Col>
-          <Col md={6}>
-            <h2>Maquina de cocer flora turquesa</h2>
-            <h5>Precio:$260.000</h5>
-          </Col>
-        </Row>
+      <Form className="mb-4">
+  <Row>
+    <Col md={4} className="input-icono mb-2">
+      <FaSearch className="icono" />
+      <Form.Control
+        type="text"
+        placeholder="Buscar producto..."
+        value={busqueda}
+        onChange={(e) => setBusqueda(e.target.value)}
+      />
+    </Col>
 
-        <Row className="mb-5 align-items-center">
-          <Col md={6}>
-            <h2>Maquina de cocer mecanica</h2>
-            <h5>Precio:$340.000</h5>
-          </Col>
-          <Col md={6}>
-            <img src={img2} alt="Imagen 2" style={{ width: '100%', borderRadius: '8px' }} />
-          </Col>
-        </Row>
+    <Col md={2} className="mb-2">
+      <Form.Control
+        type="number"
+        placeholder="Precio mínimo"
+        value={precioMin}
+        onChange={(e) => setPrecioMin(e.target.value)}
+      />
+    </Col>
 
-        {/* Una imagen mediana y dos imágenes pequeñas al lado */}
-        <Row className="mb-5">
-          <Col md={6}>
-            <img src={img3} alt="Mediana" style={{ width: '100%', borderRadius: '8px' }} />
-          </Col>
-          <Col md={6}>
-            <Row>
-              <Col xs={6}>
-                <img src={img4} alt="Pequeña 1" style={{ width: '100%', borderRadius: '8px' }} />
-              </Col>
-              <Col xs={6}>
-                <img src={img5} alt="Pequeña 2" style={{ width: '100%', borderRadius: '8px' }} />
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-
-        {/* 2 columnas con 2 filas de puntos */}
-        <Row className="mb-5">
-          <Col md={6}>
-            <ul>
-                <h4></h4>
-              <li>Punto destacado 1</li>
-              <li>Punto importante 2</li>
-            </ul>
-            <ul>
-              <li>Punto útil 3</li>
-              <li>Punto clave 4</li>
-            </ul>
-          </Col>
-          <Col md={6}>
-            <ul>
-              <li>Beneficio adicional 1</li>
-              <li>Ventaja competitiva 2</li>
-            </ul>
-            <ul>
-              <li>Garantía o soporte</li>
-              <li>Llamado a la acción</li>
-            </ul>
-          </Col>
+    <Col md={2} className="mb-2">
+      <Form.Control
+        type="number"
+        placeholder="Precio máximo"
+        value={precioMax}
+        onChange={(e) => setPrecioMax(e.target.value)}
+      />
+    </Col>
+  </Row>
+</Form>
+        <h2 className="mb-4">Nuestros productos</h2>
+        <Row>
+          {productosFiltrados.map((producto, index) => (
+            <Col md={4} className="mb-4" key={producto._id || index}>
+  <div className="card-producto border rounded shadow-sm p-3">
+    {producto.imagen && (
+      <img
+        src={producto.imagen}
+        alt={producto.nombre}
+        className="img-fluid mb-3"
+      />
+    )}
+    <div className="contenido">
+      <div>
+        <h5>{producto.nombre}</h5>
+        <p>{producto.descripcion}</p>
+      </div>
+      <div>
+        <h6>${producto.precio}</h6>
+        <Button variant="primary" href="/carrito">Comprar</Button>
+      </div>
+    </div>
+  </div>
+</Col>
+    ))}
         </Row>
       </Container>
+
     </div>
   );
 };
