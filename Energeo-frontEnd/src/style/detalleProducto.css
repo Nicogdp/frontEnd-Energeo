@@ -1,0 +1,48 @@
+.zoom-container {
+  overflow: hidden;
+}
+
+.zoom-image {
+  transition: transform 0.4s ease;
+  cursor: zoom-in;
+}
+
+.zoom-image:hover {
+  transform: scale(1.2);
+}
+
+.zoom img {
+  transition: transform 0.3s ease;
+  cursor: zoom-in;
+}
+
+.imgEnvios{
+   width: 20px;
+  height: 20px;
+}
+
+.descripcion {
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 300;
+  color: #333;
+}
+
+.card-title {
+  font-weight: 500;
+}
+
+.card-text {
+  color: #555;
+}
+
+.relacionados-container {
+  margin-top: 60px;
+}
+
+.relacionados-container h3 {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  font-weight: 500;
+  font-family: 'Segoe UI', sans-serif;
+}
+
