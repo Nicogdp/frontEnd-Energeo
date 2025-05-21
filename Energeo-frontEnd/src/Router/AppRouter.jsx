@@ -5,6 +5,7 @@ import { Login } from '../pages/Login';
 import { Admin } from '../pages/Admin';
 import { Home } from '../pages/Home';
 import { Shop } from '../pages/Shop';
+import { DetalleProducto } from '../pages/DetalleProducto';
 
 export const AppRouter = () => {
   return (
@@ -14,6 +15,7 @@ export const AppRouter = () => {
       <Route path="/administracion" element={<Admin />} />
       <Route path="/home" element={<Home />} />
       <Route path="/shop" element={<Shop />} />
+      <Route path="/detalleProducto" element={<DetalleProducto />} />
     </Routes>
   );
 };

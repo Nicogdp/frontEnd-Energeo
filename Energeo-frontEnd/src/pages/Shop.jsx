@@ -3,9 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import axios from 'axios'; // asegurate de tener axios instalado
 import '../style/shop.css';
+import '../style/App.css'
 import { FaSearch } from 'react-icons/fa';
 import bannerEnergeo from '../image/bannerShopp.jpg'
 import testApi from '../Api/testApi';
+import '../style/tarjetaProducto.css'; // o donde lo tengas
+import TarjetaProducto from '../components/TarjetaProducto';
+import { useNavigate } from 'react-router';
 
 export const Shop = () => {
   const [productos, setListaProductos] = useState([]);
@@ -13,28 +17,35 @@ export const Shop = () => {
   const [precioMin, setPrecioMin] = useState('');
   const [precioMax, setPrecioMax] = useState('');
 
+
+
+  
   const getProductos = async () => {
-        try {
-            const resp = await testApi.get('/admin/productos');
-           setListaProductos(resp.data.listaProductos);
-
-        } catch (error) {
-            console.log(error)
-        }
+    try {
+      const resp = await testApi.get('/admin/productos');
+      setListaProductos(resp.data.listaProductos);
+      
+    } catch (error) {
+      console.log(error)
     }
-
-    useEffect(() => {
-      getProductos();
-    }, []);
-
-     const productosFiltrados = productos.filter((producto) => {
-     const coincideNombre = producto.nombre.toLowerCase().includes(busqueda.toLowerCase());
-     const cumpleMin = precioMin === '' || producto.precio >= parseFloat(precioMin);
-     const cumpleMax = precioMax === '' || producto.precio <= parseFloat(precioMax);
-     return coincideNombre && cumpleMin && cumpleMax;
+  }
+  
+  useEffect(() => {
+    getProductos();
+  }, []);
+  
+  const productosFiltrados = productos.filter((producto) => {
+    const coincideNombre = producto.nombre.toLowerCase().includes(busqueda.toLowerCase());
+    const cumpleMin = precioMin === '' || producto.precio >= parseFloat(precioMin);
+    const cumpleMax = precioMax === '' || producto.precio <= parseFloat(precioMax);
+    return coincideNombre && cumpleMin && cumpleMax;
   });
+  
+  const navigate = useNavigate();
 
-
+  const handleComprar = (producto) => {
+    navigate('/detalleProducto', { state: { producto } });
+  };
 
   return (
     <div>
@@ -81,30 +92,12 @@ export const Shop = () => {
   </Row>
 </Form>
         <h2 className="mb-4">Nuestros productos</h2>
-        <Row>
-          {productosFiltrados.map((producto, index) => (
-            <Col md={4} className="mb-4" key={producto._id || index}>
-  <div className="card-producto border rounded shadow-sm p-3">
-    {producto.imagen && (
-      <img
-        src={producto.imagen}
-        alt={producto.nombre}
-        className="img-fluid mb-3"
-      />
-    )}
-    <div className="contenido">
-      <div>
-        <h5>{producto.nombre}</h5>
-        <p>{producto.descripcion}</p>
-      </div>
-      <div>
-        <h6>${producto.precio}</h6>
-        <Button variant="primary" href="/carrito">Comprar</Button>
-      </div>
-    </div>
-  </div>
-</Col>
-    ))}
+        <Row >
+       {productosFiltrados.map((producto, index) => (
+  <Col md={4} className="mb-4" key={producto._id || index}>
+    <TarjetaProducto producto={producto} />
+  </Col>
+))}
         </Row>
       </Container>
 

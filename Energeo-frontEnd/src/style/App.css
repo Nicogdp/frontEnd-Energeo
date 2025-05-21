@@ -1,0 +1,32 @@
+/* App.css o index.css */
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: #333; /* menos negro que el #000 */
+}
+
+/* Ejemplo de asignar fuentes distintas por sección */
+.bannerShop {
+  font-family: 'Poppins', sans-serif;
+}
+
+.section-titulo {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+
+.card-producto {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+.descripcion {
+    font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+.card-producto p, 
+.card-producto h5,
+.card-producto h6 {
+  color: #444; /* gris oscuro */
+  font-weight: 300; /* más fino */
+}
