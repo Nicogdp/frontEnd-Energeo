@@ -1,0 +1,81 @@
+.home-container {
+  background-color: #f8f9fa;
+  padding-bottom: 40px;
+}
+
+.home-carousel-section {
+  background: #ffffff;
+  padding: 40px 0;
+}
+
+.carousel-text h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.carousel-text p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.home-section,
+.home-section-cta {
+  padding: 60px 0;
+}
+
+.home-section h3,
+.home-section-cta h3 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.home-section-cta button {
+  margin-top: 20px;
+}
+
+.img-fade-right {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  
+  /* Fade hacia la derecha */
+  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0));
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0));
+}
+
+.hero-carousel .carousel-img {
+  height: 85vh;
+  object-fit: cover;
+  filter: brightness(0.75);
+}
+
+.hero-carousel .carousel-caption {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  right: auto;
+  width: 30%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  border-radius: 16px;
+}
+
+.hero-carousel .carousel-caption h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+  margin: 0;
+}
+
+.hero-carousel .carousel-caption p {
+  font-size: 1.2rem;
+  color: #e0e0e0;
+  margin: 0;
+}

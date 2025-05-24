@@ -10,8 +10,10 @@ const RegistroModal = ({ show, handleClose }) => {
   const [edad, setEdad] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const registroBackend = async () => {
+        setLoading(true);
     try {
       const resp = await testApi.post('/auth/registro', {
         nombre,
@@ -33,7 +35,9 @@ const RegistroModal = ({ show, handleClose }) => {
         title: 'Oops...',
         text: msg,
       });
-    }
+    }finally{
+        setLoading(false);
+    };
   };
 
   const handleRegistro = (e) => {
@@ -68,8 +72,8 @@ const RegistroModal = ({ show, handleClose }) => {
             <Form.Control type="password" placeholder="Contraseña" onChange={(e) => setPassword(e.target.value)} />
           </div>
 
-          <Button variant="dark" type="submit" className="w-100 mt-2">
-            Registrarse
+          <Button variant="dark" type="submit" className="w-100 mt-2" disabled={loading}>
+            {loading ? 'Registrando...':'Registrado'}
           </Button>
         </Form>
       </Modal.Body>

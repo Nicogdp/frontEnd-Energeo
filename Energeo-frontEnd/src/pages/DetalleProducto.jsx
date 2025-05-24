@@ -85,7 +85,7 @@ export const DetalleProducto = () => {
               <h5 className="mb-0">Aceptamos efectivo y transferencia</h5>
             </Col>
           </Row>
-          <Button className='p-3 ' variant="dark">Agregar al carrito</Button>
+          <Button className='p-3 ' variant="dark">Consultar Precio</Button>
         </Col>
       </Row>
 

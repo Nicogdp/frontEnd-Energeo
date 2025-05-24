@@ -21,8 +21,8 @@ export const AppNavbar = () => {
               <Nav.Link onClick={() => setShowLogin(true)}>Login</Nav.Link>
               <Nav.Link onClick={() => setShowRegistro(true)}>Registro</Nav.Link>
               <Nav.Link as={Link} to="/sobre-nosotros">Sobre Nosotros</Nav.Link>
-              <Nav.Link as={Link} to="/carrito">Carrito 🛒</Nav.Link>
               <Nav.Link as={Link} to="/administracion">Admin</Nav.Link>
+              <Nav.Link as={Link} to="/cursos">Cursos</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
