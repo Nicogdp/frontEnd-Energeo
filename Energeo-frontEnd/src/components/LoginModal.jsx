@@ -8,24 +8,42 @@ import '../style/modalEstilos.css';
 const LoginModal = ({ show, handleClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
 
   const loginBackend = async () => {
+    setLoading(true);
     try {
       const resp = await testApi.post('/auth/login', { email, password });
-      Swal.fire({
-        position: 'center',
-        title: 'Usuario logueado exitosamente',
-        icon: 'success',
-        timer: 1500,
-      });
-      localStorage.setItem('token', resp.data.token);
-      handleClose();
+
+  const { token, role , rol} = resp.data;
+
+  localStorage.setItem('token', token);
+  localStorage.setItem('isAuth', 'true');
+  localStorage.setItem('rol', role || rol ); // Guarda el rol que vino del backend
+
+  Swal.fire({
+   position: 'center',
+   title: 'acceso concedido',
+   icon: 'success',
+   timer: 1500,
+  });
+
+  handleClose();
+    window.location.href = role || rol  === 'admin' ? '/administracion' : '/home';
+
+// Si es admin, redirigimos a la vista de administración
+  if (role === 'admin') {
+   window.location.href = '/administracion';
+  }
     } catch (error) {
       Swal.fire({
         icon: 'error',
         title: 'Error de login',
         text: error.response?.data?.msg || 'Ocurrió un error',
       });
+    }finally{
+        setLoading(false);
     }
   };
 
@@ -59,8 +77,8 @@ const LoginModal = ({ show, handleClose }) => {
             />
           </div>
 
-          <Button variant="dark" type="submit" className="w-100 mt-2">
-            Ingresar
+          <Button variant="dark" type="submit" className="w-100 mt-2" disabled={loading}>
+           {loading ? 'Ingresando...':'Ingresar'}
           </Button>
         </Form>
       </Modal.Body>
