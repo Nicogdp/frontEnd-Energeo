@@ -1,0 +1,24 @@
+.nav-tabs .nav-link.active {
+  background-color: #dee2e6;
+  color: #000;
+  font-weight: bold;
+  border-color: #ced4da #ced4da #fff;
+}
+
+.nav-tabs .nav-link {
+  color: #555;
+  transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+  color: #000;
+}
+
+.tabla-scroll {
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.tabla-scroll table {
+  min-width: 800px; /* O el valor que se ajuste a tu contenido */
+}

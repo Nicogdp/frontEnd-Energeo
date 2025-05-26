@@ -21,7 +21,6 @@ const TarjetaProducto = ({ producto }) => {
       )}
       <div className="contenido">
         <h5 className='descripcionn'>{producto.nombre}</h5>
-        <p>${producto.precio}</p>
         <Button variant="outline-dark" onClick={handleVerMas}>
           Ver más
         </Button>

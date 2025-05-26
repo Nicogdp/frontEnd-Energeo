@@ -1,0 +1,14 @@
+.sobre-nosotros-container {
+  background-color: #f8f9fa;
+  border-radius: 16px;
+}
+
+.sobre-nosotros-container h2 {
+  font-weight: 700;
+  color: #1f1f1f;
+}
+
+.sobre-nosotros-container p {
+  font-size: 1.1rem;
+  color: #444;
+}

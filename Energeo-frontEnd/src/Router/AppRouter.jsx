@@ -7,6 +7,8 @@ import { Shop } from '../pages/Shop';
 import { DetalleProducto } from '../pages/DetalleProducto';
 import { Cursos } from '../pages/Cursos';
 import AdminRoute from './AdminRoute';
+import { ConsultaPrecio } from '../pages/ConsultaPrecio';
+import { SobreNosotros } from '../pages/SobreNosotros';
 
 export const AppRouter = () => {
   return (
@@ -15,6 +17,8 @@ export const AppRouter = () => {
       <Route path="/shop" element={<Shop />} />
       <Route path="/detalleProducto" element={<DetalleProducto />} />
       <Route path="/cursos" element={<Cursos />} />
+      <Route path="/sobreNosotros" element={<SobreNosotros />} />
+      <Route path="/consultarPrecio" element={<ConsultaPrecio />} />
 
        <Route
         path="/administracion"

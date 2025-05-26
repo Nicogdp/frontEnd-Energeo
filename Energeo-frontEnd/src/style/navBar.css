@@ -1,0 +1,36 @@
+/* AppNavbar.css */
+
+.custom-navbar {
+   background-color: #f4f1ee !important; /* blanco hueso */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+  top: 0;
+  width: 100%;
+ 
+}
+
+.custom-navbar .nav-link {
+  color: #333 !important;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+}
+
+.custom-navbar .nav-link:hover {
+  color: #007bff !important;
+  text-decoration: underline;
+}
+
+.custom-navbar .navbar-brand img {
+  height: 80px; /* Aumentá este valor según te guste */
+  width: auto;
+  object-fit: contain;
+}
+.custom-navbar .navbar-brand img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+
