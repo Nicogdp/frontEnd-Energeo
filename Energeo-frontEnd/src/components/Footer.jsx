@@ -8,7 +8,7 @@ export const Footer = () => {
     <footer style={{ backgroundColor: '#f5f5f5', color: '#333', padding: '2rem 0', borderTop: '1px solid #ddd' }}>
       <Container>
         <Row className="text-center text-md-start">
-          {/* Columna 1: Logo o nombre */}
+          
           <Col md={4} className="mb-4 mb-md-0">
             <h3 style={{ fontWeight: 'bold' }}>ENERGEO</h3>
             <p style={{ fontSize: '0.9rem', color: '#666' }}>
@@ -16,13 +16,13 @@ export const Footer = () => {
             </p>
           </Col>
 
-          {/* Columna 2: Accesos */}
+          
           <Col md={4} className="mb-4 mb-md-0">
             <h5 className="mb-3">Accesos</h5>
             <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
               <li>
                 <Link to="/shop" style={{ textDecoration: 'none', color: '#333' }}>
-                  Eshop
+                  E-shop
                 </Link>
               </li>
               <li>
