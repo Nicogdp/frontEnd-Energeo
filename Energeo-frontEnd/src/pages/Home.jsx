@@ -88,7 +88,8 @@ export const Home = () => {
         </Row>
       </Container>
 
-      {/* Sección final con tarjetas */}
+      <h1 className='text-center'>Nuestros servicio</h1>
+      <hr />
       <Container className="py-5" data-aos="fade-up">
         <Row>
           <Col md={6} className="mb-4">
