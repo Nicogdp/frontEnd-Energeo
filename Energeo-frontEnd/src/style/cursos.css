@@ -150,6 +150,7 @@
 }
 
 .info-title {
+  text-align: center;
   font-size: 1.4rem;
   font-weight: 600;
   margin-bottom: 15px;
@@ -157,7 +158,35 @@
 }
 
 .info-text {
+  text-align: center;
   font-size: 1rem;
   color: #444;
   line-height: 1.6;
+}
+
+
+.info-cursos {
+    text-align: center;
+  padding: 40px 0;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+}
+
+.info-cursos .info-title {
+    text-align: center;
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.info-cursos .info-list {
+    text-align: center;
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+.info-cursos .info-list li {
+  margin-bottom: 0.5rem;
 }

@@ -10,6 +10,9 @@ import testApi from '../Api/testApi';
 import '../style/tarjetaProducto.css'; // o donde lo tengas
 import TarjetaProducto from '../components/TarjetaProducto';
 import { useNavigate } from 'react-router';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 
 export const Shop = () => {
   const [productos, setListaProductos] = useState([]);
@@ -32,6 +35,7 @@ export const Shop = () => {
   
   useEffect(() => {
     getProductos();
+    AOS.init({ duration: 1000 });
   }, []);
   
   const productosFiltrados = productos.filter((producto) => {
@@ -60,7 +64,7 @@ export const Shop = () => {
 
       {/* Sección de productos dinámicos */}
       <Container className="my-5">
-      <Form className="mb-4">
+      <Form className="mb-4" data-aos="fade-down">
   <Row>
     <Col md={4} className="input-icono mb-2">
       <FaSearch className="icono" />
@@ -91,14 +95,20 @@ export const Shop = () => {
     </Col>
   </Row>
 </Form>
-        <h2 className="mb-4">Nuestros productos</h2>
-        <Row >
-       {productosFiltrados.map((producto, index) => (
-  <Col md={4} className="mb-4" key={producto._id || index}>
-    <TarjetaProducto producto={producto} />
-  </Col>
-))}
-        </Row>
+        <h2 className="mb-4" data-aos="fade-right">Nuestros productos</h2>
+       <Row>
+  {productosFiltrados.map((producto, index) => (
+    <Col
+      md={4}
+      className="mb-4"
+      key={producto._id || index}
+      data-aos="fade-up"
+      data-aos-delay={index * 100} // animación escalonada
+    >
+      <TarjetaProducto producto={producto} />
+    </Col>
+  ))}
+</Row>
       </Container>
 
     </div>
