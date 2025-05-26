@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const testApi= axios.create({
-    baseURL: 'http://localhost:4000/'
+    baseURL: 'https://backend-enegeo.onrender.com'
 });
 
 //Cada vez que hago una peticion a un endponit intercepto la request y extraigo el token del localstoge
